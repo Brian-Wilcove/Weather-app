@@ -14,6 +14,12 @@ public class WeatherService {
     String url = "http://api.openweathermap.org/data/2.5/weather?zip=" + 
         zipCode + "&units=imperial&appid=" + apiKey;
     RestTemplate restTemplate = new RestTemplate();
-    return restTemplate.getForObject(url, Response.class);
+    try {
+        return restTemplate.getForObject(url, Response.class);   
+    } catch (Exception e) {
+        Response response = new Response();
+        response.setName("error");
+        return response;
+    }
 }
 }
